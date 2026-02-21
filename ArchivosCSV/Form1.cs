@@ -271,14 +271,15 @@ namespace ArchivosCSV
                 }
 
                 textoBuscar = textoBuscar.ToLower();
-
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
+            dataGridView1.ClearSelection();
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    foreach (DataGridViewCell celda in fila.Cells)
+                if (fila.IsNewRow) continue;
+
+                foreach (DataGridViewCell celda in fila.Cells)
                     {
-                        if (celda.Value != null &&
-                            celda.Value.ToString().ToLower().Contains(textoBuscar))
-                        {
+                        if (celda.Value != null && celda.Value.ToString().Trim().ToLower() == textoBuscar)
+                    {
                             fila.Selected = true;
 
                             dataGridView1.FirstDisplayedScrollingRowIndex = fila.Index;
